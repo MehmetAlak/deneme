@@ -1,0 +1,47 @@
+<hr>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Yazmaya Başlayın..."  #textPolice>
+      <input type="text" placeholder="Yazın" (keyup.enter)="addToDo(textPolice,textZeyil)" #textZeyil>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="addToDo(textPolice,textZeyil)">Ekle</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+<hr>
+
+<div class="panel panel-default" *ngIf="todos.length; else policeAlert">
+  <div class="panel-heading">Poliçeler</div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>PoliceNo</th>
+      <th>Zeyl</th>
+      <th>Olusma Tarihi</th>
+      <th>Sil</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let todo of todos;let i=index">
+      <td>{{i+1}}</td>
+      <td>{{todo.police}}</td>
+      <td>{{todo.zeyil}}</td>
+      <td>{{todo.createDate | date: 'dd.MM.yyyy / hh.mm.ss'}}</td>
+      <td>
+        <button class="btn btn-danger" (click)="removeToDo(todo)">Sil</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #policeAlert>
+  <div class="alert alert-danger" role="alert">Poliçe yok.Ekleyiniz..</div>
+</ng-template>
+
+
